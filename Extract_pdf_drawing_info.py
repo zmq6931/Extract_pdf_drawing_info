@@ -22,8 +22,8 @@ class myclass(object):
     @staticmethod
     def pdf_extract_text_by_pt_area(pdfFilePath,pt1,pt2, pageIndex=0, zoom_scale=10):
         '''
-        pt1为pdf截图区域左上角点，
-        pt2为pdf截图区域右上角点。
+        pt1, left top point
+        pt2, right bottom point
         '''
         imageExportFullPath = r"C:\export_temp\tempImage.png"
         if os.path.exists(r"C:\export_temp")==False: 
