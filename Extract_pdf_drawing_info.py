@@ -5,7 +5,6 @@ import win32com.client
 from pyxll import xl_app
 import easyocr
 
-
 class myclass(object):
     @staticmethod
     def get_all_file_path_include_Subfolder(folderFullPath):
@@ -21,7 +20,7 @@ class myclass(object):
         excel = xl_app()
         return excel
     @staticmethod
-    def pdf_extract_text_by_pt_area(pdfFilePath,pt1,pt2, pageIndex=0, zoom_scale=3):
+    def pdf_extract_text_by_pt_area(pdfFilePath,pt1,pt2, pageIndex=0, zoom_scale=10):
         '''
         pt1为pdf截图区域左上角点，
         pt2为pdf截图区域右上角点。
@@ -59,7 +58,13 @@ class myclass(object):
         return result_text
 
 
-folderPath = r"C:\Users\Administrator\Desktop\dddwg\pdf_info_extract" # modify this path to your local path
+
+inputtext=input("please input pdf folder path: \n\r")
+
+
+folderPath = inputtext
+if os.path.exists(folderPath)==False:
+    exit()
 allFileList=myclass.get_all_file_path_include_Subfolder(folderPath)
 
 excel=myclass.getExcelApp()
@@ -76,18 +81,20 @@ worksheet.Cells(1, 5).Value = "filePath"
 
 rowNumber=2
 for f in allFileList:
+    if str(f).lower().endswith(".pdf")==False:
+        continue
     filePath=f
     filename=os.path.basename(filePath)
     worksheet.Cells(rowNumber, 1).Value = filename
     
-    title_pt1=(2839,2180)
+    title_pt1=(2820,2180)
     title_pt2=(3334,2278)
     
-    drawingNo_pt1=(2840,2294)
-    drawingNo_pt2=(3176,2319)
+    drawingNo_pt1=(2820,2294)
+    drawingNo_pt2=(3176,2330)
     
-    revision_pt1=(3292,2294)
-    revision_pt2=(3334,2319)
+    revision_pt1=(3283,2294)
+    revision_pt2=(3334,2330)
     try:
         title=myclass.pdf_extract_text_by_pt_area(filePath,title_pt1,title_pt2)
     except:
@@ -109,6 +116,7 @@ for f in allFileList:
     print(filename)
     rowNumber+=1
 
+print("finish")
     
     
   

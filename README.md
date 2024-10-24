@@ -12,6 +12,9 @@ pip install pyxll
 
 pip install easyocr
 
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+
 # IDE vscode
 
 download link: https://code.visualstudio.com/
