@@ -60,7 +60,7 @@ class myclass(object):
 
 
 inputtext=input("please input pdf folder path: \n\r")
-
+picScale=input("\n\rpicture scale size: \n\r")
 
 folderPath = inputtext
 if os.path.exists(folderPath)==False:
@@ -87,26 +87,49 @@ for f in allFileList:
     filename=os.path.basename(filePath)
     worksheet.Cells(rowNumber, 1).Value = filename
     
-    title_pt1=(2820,2180)
-    title_pt2=(3334,2278)
+    #region A0
+    title_pt1=(2974,2186)
+    title_pt2=(3315,2286)
     
-    drawingNo_pt1=(2820,2294)
-    drawingNo_pt2=(3176,2330)
+    drawingNo_pt1=(2955,2275)
+    drawingNo_pt2=(3208,2304)
     
-    revision_pt1=(3283,2294)
-    revision_pt2=(3334,2330)
+    revision_pt1=(3295,2298)
+    revision_pt2=(3315,2328)
+    #endregion    
     try:
-        title=myclass.pdf_extract_text_by_pt_area(filePath,title_pt1,title_pt2)
+        title=myclass.pdf_extract_text_by_pt_area(filePath,title_pt1,title_pt2,0,int(picScale))
     except:
-        title="error"
+        try:
+            #region A1
+            title_pt1=(2088,1512)
+            title_pt2=(2315,1584)   
+            #endregion
+            title=myclass.pdf_extract_text_by_pt_area(filePath,title_pt1,title_pt2,0,int(picScale))
+        except:
+            title="error"
     try:
-        drawingNo=myclass.pdf_extract_text_by_pt_area(filePath,drawingNo_pt1,drawingNo_pt2)
+        drawingNo=myclass.pdf_extract_text_by_pt_area(filePath,drawingNo_pt1,drawingNo_pt2,0,int(picScale))
     except:
-        drawingNo="error"
+        try:
+            #region A1
+            drawingNo_pt1=(2088,1608)
+            drawingNo_pt2=(2268,1630)   
+            #endregion
+            drawingNo=myclass.pdf_extract_text_by_pt_area(filePath,drawingNo_pt1,drawingNo_pt2,0,int(picScale))
+        except:
+            drawingNo="error"
     try:
-        revision=myclass.pdf_extract_text_by_pt_area(filePath,revision_pt1,revision_pt2)
+        revision=myclass.pdf_extract_text_by_pt_area(filePath,revision_pt1,revision_pt2,0,int(picScale))
     except:
-        revision="error"
+        try:
+            #region A1
+            revision_pt1=(2310,1608)
+            revision_pt2=(2328,1630)   
+            #endregion
+            revision=myclass.pdf_extract_text_by_pt_area(filePath,revision_pt1,revision_pt2,0,int(picScale))
+        except:
+            revision="error"
     worksheet.Cells(rowNumber, 2).Value = title
     worksheet.Cells(rowNumber, 3).Value = drawingNo
     worksheet.Cells(rowNumber, 4).Value = revision

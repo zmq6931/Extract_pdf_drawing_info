@@ -1,0 +1,5 @@
+/.venv
+/build
+/dist
+/tt.py
+/Extract_pdf_drawing_info.spec
